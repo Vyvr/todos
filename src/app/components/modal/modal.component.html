@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Create new Todo!</h1>
+<div mat-dialog-content>
+  <p>What are we going to do?</p>
+  <mat-form-field appearance="fill">
+    <mat-label>Name your ToDo!</mat-label>
+    <input matInput [(ngModel)]="data.name" />
+  </mat-form-field>
+  <p>That means?</p>
+  <mat-form-field appearance="fill">
+    <mat-label>Give it description!</mat-label>
+    <input matInput [(ngModel)]="data.description" />
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="closeModalWithoutData()">Close 💩</button>
+  <button mat-button (click)="closeAndSaveData()">Create 😻</button>
+</div>

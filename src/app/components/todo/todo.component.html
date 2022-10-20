@@ -1,0 +1,54 @@
+<mat-expansion-panel class="todo">
+  <mat-expansion-panel-header>
+    <mat-panel-title class="todo-title">
+      <div *ngIf="!editMode">{{ title }}</div>
+      <div *ngIf="editMode">
+        <mat-form-field>
+          <input
+            #newTitle
+            matInput
+            value="{{ title }}"
+            (keyup)="setNewTitle(newTitle.value)"
+          />
+        </mat-form-field>
+      </div>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <div class="action-buttons-group">
+    <div>
+      <button mat-icon-button color="primary" (click)="editTodo()">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="deleteTodo()">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+    <div>
+      <button mat-icon-button color="primary" (click)="moveLeft()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <button mat-icon-button color="primary" (click)="moveRight()">
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+    </div>
+  </div>
+  <mat-panel-description class="todo-content">
+    <div *ngIf="!editMode">{{ description }}</div>
+    <div *ngIf="editMode">
+      <mat-form-field>
+        <textarea
+          #newDescription
+          matInput
+          value="{{ description }}"
+          (keyup)="setNewDescription(newDescription.value)"
+        ></textarea>
+      </mat-form-field>
+      <button mat-icon-button color="primary" (click)="changeTodo()">
+        <mat-icon>check</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="cancelChange()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </mat-panel-description>
+</mat-expansion-panel>
