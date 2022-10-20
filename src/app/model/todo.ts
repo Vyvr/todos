@@ -1,5 +1,5 @@
-export interface ITodo {
+export interface TodoInterface {
   title: string;
-  parent: string;
+  parent?: string;
   description: string;
 }

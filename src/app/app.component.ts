@@ -1,7 +1,6 @@
-import { Component, Output } from '@angular/core';
-import { CardComponent } from './components/card/card.component';
-import { ICard } from './model/card';
-import { ITodo } from './model/todo';
+import { Component } from '@angular/core';
+import { CategoryInterface } from './model/category';
+import { EventService } from './services/event.service';
 
 @Component({
   selector: 'app-root',
@@ -9,39 +8,56 @@ import { ITodo } from './model/todo';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'todos';
-  cardTitles = ['To do', 'In progress', 'Done'];
-  cards: ICard[] = [];
-  todosArr: ITodo[] = [
+  categories: CategoryInterface[] = [
     {
-      title: 'do homework',
-      description: "Hey oi need to do my homework!",
-      parent: 'To do',
+      title: 'To do',
+      previous: null,
+      next: 'In progress',
+      todos: [
+        {
+          title: 'do homework',
+          description: 'Hey oi need to do my homework!',
+          parent: 'To do',
+        },
+        {
+          title: 'Take a dog for a walk',
+          description: '',
+          parent: 'To do',
+        },
+      ],
     },
     {
-      title: 'Take a dog for a walk',
-      parent: 'To do',
-      description: "",
+      title: 'In progress',
+      previous: 'To do',
+      next: 'Done',
+      todos: [
+        {
+          title: 'shit yourself',
+          description: "Oh no i've just shit myself :C",
+        },
+      ],
     },
     {
-      title: 'Make dinner',
-      parent: 'Done',
-      description: "",
-    },
-    {
-      title: 'shit yourself',
-      parent: 'In progress',
-      description: "Oh no i've just shit myself :C",
+      title: 'Done',
+      previous: 'In progress',
+      next: null,
+      todos: [
+        {
+          title: 'Make dinner',
+          description: '',
+        },
+      ],
     },
   ];
+  title = 'todos';
 
-  constructor() {
-    for (const tit of this.cardTitles) {
-      this.cards.push({ title: tit });
-    }
+  constructor(private evtSvc: EventService) {}
+
+  ngOnInit() {
+    this.evtSvc.changeCategoryEventListner().subscribe((msg) => {
+      console.log(msg);
+    });
   }
 
-  moveTodoLeft() {
-    
-  }
+  moveTodoLeft() {}
 }

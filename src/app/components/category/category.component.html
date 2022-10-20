@@ -2,11 +2,11 @@
   <mat-card>
     <mat-card-header class="card-header">
       <mat-card-title class="card-header-title">
-        <div>{{ title }}</div>
+        <div>{{ category.title }}</div>
       </mat-card-title>
 
       <button
-        *ngIf="title === 'To do'"
+        *ngIf="category.title === 'To do'"
         mat-icon-button
         color="primary"
         (click)="openDialog('300ms', '150ms')"
@@ -15,16 +15,15 @@
       </button>
     </mat-card-header>
     <mat-card-content>
-      <div *ngFor="let todo of children">
-        <app-todo
+      <div *ngFor="let todo of category.todos">
+        <app-todo-card
           [title]="todo.title"
           [description]="todo.description"
-          [parent]="todo.parent"
+          [nextCategory]="category.next"
+          [previousCategory]="category.previous"
           (deleteTitleEmit)="deleteTodo($event)"
-          (moveLeftEmit)="moveTodoLeft()"
-          (moveRightEmit)="moveTodoRight()"
         >
-        </app-todo>
+        </app-todo-card>
       </div>
     </mat-card-content>
   </mat-card>

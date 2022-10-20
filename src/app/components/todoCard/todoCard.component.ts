@@ -1,26 +1,28 @@
-import { outputAst } from '@angular/compiler';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ITodo } from 'src/app/model/todo';
+import { EventService } from 'src/app/services/event.service';
 
 @Component({
-  selector: 'app-todo',
-  templateUrl: './todo.component.html',
-  styleUrls: ['./todo.component.scss'],
+  selector: 'app-todo-card',
+  templateUrl: './todoCard.component.html',
+  styleUrls: ['./todoCard.component.scss'],
 })
-export class TodoComponent implements OnInit {
+export class TodoCardComponent implements OnInit {
+  newTitle = '';
+  newDescription = '';
   @Input() title = '';
   @Input() description = '';
   @Input() parent = '';
   @Input() editMode = false;
+  @Input() previousCategory: string | null;
+  @Input() nextCategory: string | null;
+  @Output() changeOnSelectedCategoryEmit = new EventEmitter<string>();
   @Output() deleteTitleEmit = new EventEmitter<string>();
-  @Output() moveTodoLeftEmit = new EventEmitter<string>();
-  @Output() moveTodoRightEmit = new EventEmitter<string>();
 
+  constructor(private evtSvc: EventService){}
 
-  newTitle = '';
-  newDescription = '';
-
-  constructor() {}
+  changeCategory(selectedCategory: string) {
+     this.evtSvc.emitChangeCategoryEvent({todoName: this.title, targetCategory: selectedCategory })
+  }
 
   editTodo() {
     this.editMode = true;
@@ -28,13 +30,6 @@ export class TodoComponent implements OnInit {
 
   deleteTodo() {
     this.deleteTitleEmit.next(this.title);
-  }
-
-  moveRight() {
-    this.moveTodoRightEmit.next('right')
-  }
-  moveLeft() {
-    this.moveTodoLeftEmit.next('left')
   }
 
   ngOnInit(): void {

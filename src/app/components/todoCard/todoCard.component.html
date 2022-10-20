@@ -24,12 +24,17 @@
       </button>
     </div>
     <div>
-      <button mat-icon-button color="primary" (click)="moveLeft()">
-        <mat-icon>arrow_back</mat-icon>
-      </button>
-      <button mat-icon-button color="primary" (click)="moveRight()">
-        <mat-icon>arrow_forward</mat-icon>
-      </button>
+      <mat-form-field>
+        <mat-label>Move this todo</mat-label>
+        <mat-select (selectionChange)="changeCategory($event.value)">
+          <mat-option *ngIf="previousCategory" [value]="previousCategory">
+            {{ previousCategory }}</mat-option
+          >
+          <mat-option *ngIf="nextCategory" [value]="nextCategory">{{
+            nextCategory
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
   </div>
   <mat-panel-description class="todo-content">

@@ -1,6 +1,8 @@
-<div class="cards">
-  <div *ngFor="let card of cards">
-    <app-card [title]="card.title" [children]="todosArr" (moveTodoLeftEmit)="moveTodoLeft()"
-    ></app-card>
+<div class="categories">
+  <div *ngFor="let category of categories">
+    <app-category
+      [category]="category"
+      (moveTodoLeftEmit)="moveTodoLeft()"
+    ></app-category>
   </div>
 </div>

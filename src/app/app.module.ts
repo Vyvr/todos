@@ -11,13 +11,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
+import {MatSelectModule} from '@angular/material/select';
 
-import { CardComponent } from './components/card/card.component';
-import { TodoComponent } from './components/todo/todo.component';
+import { CategoryComponent } from './components/category/category.component';
+import { TodoCardComponent } from './components/todoCard/todoCard.component';
 import { ModalComponent } from './components/modal/modal.component';
 
 @NgModule({
-  declarations: [AppComponent, CardComponent, TodoComponent, ModalComponent],
+  declarations: [AppComponent, CategoryComponent, TodoCardComponent, ModalComponent],
   entryComponents: [ModalComponent],
   imports: [
     FormsModule,
@@ -29,6 +30,7 @@ import { ModalComponent } from './components/modal/modal.component';
     MatButtonModule,
     MatInputModule,
     MatDialogModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent],
